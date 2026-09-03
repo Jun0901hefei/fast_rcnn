@@ -102,18 +102,25 @@ class LossHistory:
             plt.close()
 
     def save_data(self):
-        """保存损失数据到CSV"""
-        data = {
-            'epoch': self.epochs,
-            'train_loss': self.train_loss,
-            'train_cls_loss': self.train_cls_loss,
-            'train_bbox_loss': self.train_bbox_loss,
-            'batch_indices': self.batch_indices,
+        """保存损失数据到CSV（修复：分开保存epoch和batch数据，避免长度不一致）"""
+        epoch_data = {
+                    'epoch': self.epochs,
+                    'train_loss': self.train_loss,
+                    'train_cls_loss': self.train_cls_loss,
+                    'train_bbox_loss': self.train_bbox_loss
+            }
+        epoch_df = pd.DataFrame(epoch_data)
+        epoch_path = os.path.join(self.save_dir, 'epoch_loss.csv')
+        epoch_df.to_csv(epoch_path, index=False)
+        print(f'Epoch loss data saved to {epoch_path}')
+
+        # 保存 batch 级别数据
+        batch_data = {
+            'batch_idx': self.batch_indices,
             'batch_loss': self.batch_loss,
             'batch_cls_loss': self.batch_cls_loss,
-            'batch_bbox_loss': self.batch_bbox_loss
-        }
-        df = pd.DataFrame(data)
-        save_path = os.path.join(self.save_dir, 'loss_data.csv')
-        df.to_csv(save_path, index=False)
-        print(f'Loss data saved to {save_path}')
+            'batch_bbox_loss': self.batch_bbox_loss}
+        batch_df = pd.DataFrame(batch_data)
+        batch_path = os.path.join(self.save_dir, 'batch_loss.csv')
+        batch_df.to_csv(batch_path, index=False)
+        print(f'Batch loss data saved to {batch_path}')
