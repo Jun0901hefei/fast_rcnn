@@ -45,6 +45,11 @@
   
 8.	做非极大值抑制（NMS）来去除重复框
 
+预测结果
+
+
+<img width="869" height="4483" alt="test_visualization" src="https://github.com/user-attachments/assets/d7cd4fb7-ae6d-4b34-b379-291ab0dc0126" />
+
 
 
    数据集是李沐老师的香蕉数据集
