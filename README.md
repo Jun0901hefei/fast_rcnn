@@ -1,3 +1,6 @@
+<img width="492" height="475" alt="image" src="https://github.com/user-attachments/assets/02409995-a542-40ec-b836-8c12425308a9" />
+
+
 训练
 
 1.  用selective search 选择1000个锚框
